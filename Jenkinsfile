@@ -20,9 +20,9 @@ pipeline {
         }
 
         stage('Deploy to Prod') {
-            when {
-                changeset "**"
-            }
+            // when {
+            //     changeset "**"
+            // }
             steps {
                 script {
                     // Implementar lógica de deploy para instâncias de produção com tags
