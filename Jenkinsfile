@@ -56,7 +56,7 @@ def deployToProd() {
     // Use gcloud CLI ou Google Cloud Jenkins Plugin para fazer o deploy
     
     // Exemplo para uma aplicação PHP
-    sh "gcloud compute ssh INSTANCE_NAME --zone=${GCP_ZONE} --command='cd /caminho/da/sua/aplicacao && git fetch --tags && git checkout ${tag} && systemctl restart apache2'"
+    // sh "gcloud compute ssh INSTANCE_NAME --zone=${GCP_ZONE} --command='cd /caminho/da/sua/aplicacao && git fetch --tags && git checkout ${tag} && systemctl restart apache2'"
     
     return tag
 }
