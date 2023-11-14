@@ -1,0 +1,3 @@
+# valida-apagar
+
+iniciando testes
