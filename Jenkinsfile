@@ -21,7 +21,7 @@ pipeline {
 
         stage('Deploy to Prod') {
             when {
-                changeset "./**"
+                changeset "**"
             }
             steps {
                 script {
