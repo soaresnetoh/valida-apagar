@@ -22,7 +22,10 @@ pipeline {
             steps {
                 script {
                     sh "env | sort"
-                    def isRelease = env.GITHUB_REF.startsWith('refs/tags/')
+                    def ref = sh(script: 'git show-ref --tags -d | tac | cut -d" " -f2', returnStdout: true).trim()
+
+                    // def isRelease = env.GITHUB_REF.startsWith('refs/tags/')
+                    def isRelease = ref.startsWith('refs/tags/')
                     
                     if (isRelease) {
                         echo "Este push foi feito através de uma release."
