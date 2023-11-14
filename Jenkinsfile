@@ -18,6 +18,21 @@ pipeline {
                 checkout scm
             }
         }
+        stage('Verificar Release') {
+            steps {
+                script {
+                    def isRelease = env.GITHUB_REF.startsWith('refs/tags/')
+                    
+                    if (isRelease) {
+                        echo "Este push foi feito através de uma release."
+                        // Faça o que precisa ser feito para uma release
+                    } else {
+                        echo "Este push não foi feito através de uma release."
+                        // Faça o que precisa ser feito para outros tipos de push
+                    }
+                }
+            }
+        }        
 
         stage('Deploy to Prod') {
             // when {
@@ -52,12 +67,15 @@ def deployToProd() {
     // Gerar uma tag única com timestamp para a versão
     def tag = "deploy-" + sh(script: 'date +"%Y%m%d%H%M%S"', returnStdout: true).trim()
     
+    
     // Implementar lógica de deploy para instâncias de produção com tags
     // Use gcloud CLI ou Google Cloud Jenkins Plugin para fazer o deploy
     
     // Exemplo para uma aplicação PHP
     sshagent(credentials: ['6703ec14-cc0a-4948-9a58-7c799c4f2e14'], ignoreMissing: true) {
         // some block
+        def tagAtual = "ssh -o StrictHostKeyChecking=no usuario@10.11.19.30 'git tag -l --sort=-creatordate | head -n 2 | tac | head -n 1'"
+        echo "Tag Atual : ${tagAtual}"
         sh "ssh -o StrictHostKeyChecking=no usuario@10.11.19.30 'cd /home/usuario/valida-apagar && git fetch --tags && git checkout ${tag} && systemctl restart apache2'"
     }
     
