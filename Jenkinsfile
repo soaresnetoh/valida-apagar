@@ -21,6 +21,7 @@ pipeline {
         stage('Verificar Release') {
             steps {
                 script {
+                    sh "env | sort"
                     def isRelease = env.GITHUB_REF.startsWith('refs/tags/')
                     
                     if (isRelease) {
