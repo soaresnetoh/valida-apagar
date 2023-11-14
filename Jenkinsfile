@@ -58,7 +58,7 @@ def deployToProd() {
     // Exemplo para uma aplicação PHP
     sshagent(credentials: ['6703ec14-cc0a-4948-9a58-7c799c4f2e14'], ignoreMissing: true) {
         // some block
-        sh "ssh -o StrictHostKeyChecking=no usuario@10.11.19.30 'cd /caminho/da/sua/aplicacao && git fetch --tags && git checkout ${tag} && systemctl restart apache2'"
+        sh "ssh -o StrictHostKeyChecking=no usuario@10.11.19.30 'cd /home/usuario/valida-apagar && git fetch --tags && git checkout ${tag} && systemctl restart apache2'"
     }
     
     
